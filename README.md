@@ -188,3 +188,22 @@ in
 ```
 
 </details>
+
+<details>
+
+<summary>Excel Schedule Query</summary>
+
+## Excel Schedule Query
+
+Excel Schedule Query
+
+```txt
+let
+    Source = Csv.Document(Web.Contents("https://api.scout.kennan.tech/dump/schedule/2024inmis/csv/"),[Delimiter=",", Columns=8, Encoding=65001, QuoteStyle=QuoteStyle.None]),
+    #"Promoted Headers" = Table.PromoteHeaders(Source, [PromoteAllScalars=true]),
+    #"Changed Type" = Table.TransformColumnTypes(#"Promoted Headers",{{"matchKey", type text}, {"startTime", type text}, {"red1", Int64.Type}, {"red2", Int64.Type}, {"red3", Int64.Type}, {"blue1", Int64.Type}, {"blue2", Int64.Type}, {"blue3", Int64.Type}})
+in
+    #"Changed Type"
+```
+
+</details>
